@@ -14,6 +14,7 @@
 # Author: Nabetaro
 # Author: Nazotoko
 # Author: OKANO Takayoshi
+# Author: Rxy
 # Author: Schu
 # Author: Shirayuki
 # Author: Tombi-aburage
@@ -93,11 +94,11 @@ ja:
       relation_tag: リレーションのタグ
       session: セッション
       trace: トレース
-      tracepoint: トレース ポイント
+      tracepoint: トレースポイント
       tracetag: トレースのタグ
       user: ユーザー
       user_preference: ユーザー設定
-      user_token: ユーザーのトークン
+      user_token: ユーザートークン
       way: ウェイ
       way_node: ウェイのノード
       way_tag: ウェイのタグ
@@ -135,7 +136,7 @@ ja:
     created_by_html: "%{user}さんが<abbr title='%{title}'>%{time}前</abbr>に作成"
     created_html: <abbr title='%{title}'>%{time}前</abbr>に作成
     deleted_by_html: "%{user}さんが<abbr title='%{title}'>%{time}前</abbr>に削除"
-    download_xml: XML をダウンロード
+    download_xml: XMLをダウンロード
     edited_by_html: "%{user}さんが<abbr title='%{title}'>%{time}前</abbr>に編集"
     in_changeset: 変更セット
     location: "場所:"
@@ -267,7 +268,7 @@ ja:
       body: "本文:"
       language: "言語:"
       latitude: "緯度:"
-      location: "地域:"
+      location: "位置:"
       longitude: "経度:"
       marker_text: 日記のロケーション
       save_button: 保存
@@ -298,7 +299,7 @@ ja:
       user_title: "%{user} の日記"
     location: 
       edit: 編集
-      location: "場所:"
+      location: "位置:"
       view: 表示
     new: 
       title: 日記エントリの新規作成
@@ -419,9 +420,9 @@ ja:
       admin_levels: 
         level10: 街区境
         level2: 国境
-        level4: 道州境
+        level4: 都道府県・州境
         level5: 行政境界
-        level6: 都道府県境
+        level6: 郡境
         level8: 市区町村境
         level9: 村境
       prefix: 
@@ -1594,7 +1595,7 @@ ja:
         gravatar: Gravatar を使用
         link: http://wiki.openstreetmap.org/wiki/Gravatar
         link text: これは何ですか?
-      home location: "活動地域:"
+      home location: "ホーム地点:"
       image: "画像:"
       image size hint: (100x100 以下の正方形の画像が最適)
       keep image: 現在の画像を保持
@@ -1663,7 +1664,7 @@ ja:
     login: 
       account is suspended: 申し訳ありませんが、不審な活動のため、あなたのアカウントは一時停止されております。<br />本件についてご相談がある場合は <a href="%{webmaster}">ウェブマスター</a>にご連絡ください。
       account not active: 申し訳ありませんが、あなたのアカウントはまだ有効ではありません。<br />アカウント確認メール内のリンクをクリックするか、<a href="%{reconfirm}">新しい確認メールを要求</a>をしてください。
-      auth failure: 申し訳ありませんが、以下の理由によりログインできませんでした。
+      auth failure: 申し訳ありませんが、入力した情報でログインできませんでした。
       create account minute: アカウントを作成します。1分でできます。
       email or username: "メール アドレスまたはユーザー名:"
       heading: ログイン
@@ -1749,7 +1750,7 @@ ja:
     popup: 
       friend: 友達
       nearby mapper: 周辺のマッパー
-      your location: 自分の場所
+      your location: 自分の位置
     remove_friend: 
       button: 友達を解除
       heading: "%{user} との友達を解除しますか?"
@@ -1764,7 +1765,7 @@ ja:
       reset: パスワードを初期化
       title: パスワードの再設定
     set_home: 
-      flash success: 活動地域を保存しました。
+      flash success: ホーム地点を保存しました。
     suspended: 
       body: "<p>\n  申し訳ありませんが、不審な活動のため、あなたのアカウントは自動的に一時停止されております。\n</p>\n<p>\n この処置については近々管理者が確認をいたしますが、ご相談がある場合は%{webmaster} にご連絡いただいてもかまいません。\n</p>"
       heading: アカウント停止
@@ -1849,7 +1850,7 @@ ja:
       status: "状態:"
       traces: トレース
       unhide_user: このユーザーを再表示
-      user location: ユーザーの場所
+      user location: ユーザーの位置
       your friends: あなたの友達
   user_block: 
     blocks_by: 
