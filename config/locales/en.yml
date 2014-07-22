@@ -876,9 +876,11 @@ en:
   layouts:
     project_name:
       # in <title>
-      title: OpenStreetMap
+      #title: OpenStreetMap
+      title: Potluck 0.1.0
       # in <h1>
-      h1: OpenStreetMap
+      #h1: OpenStreetMap
+      h1: Potluck 0.1.0
     logo:
       alt_text: OpenStreetMap logo
     home: Go to Home Location
