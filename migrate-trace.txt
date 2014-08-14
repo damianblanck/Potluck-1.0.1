@@ -1,0 +1,1324 @@
+== 1 CreateOsmDb: migrating ===================================================
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_nodes", {:id=>false, :force=>true, :options=>""})
+   -> 0.0231s
+-- add_index("current_nodes", ["id"], {:name=>"current_nodes_id_idx"})
+   -> 0.0220s
+-- add_index("current_nodes", ["latitude", "longitude"], {:name=>"current_nodes_lat_lon_idx"})
+   -> 0.0224s
+-- add_index("current_nodes", ["timestamp"], {:name=>"current_nodes_timestamp_idx"})
+   -> 0.0226s
+-- change_column(:current_nodes, :id, :bigint_auto_64)
+   -> 0.0016s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_segments", {:id=>false, :force=>true, :options=>""})
+   -> 0.0212s
+-- add_index("current_segments", ["id", "visible"], {:name=>"current_segments_id_visible_idx"})
+   -> 0.0223s
+-- add_index("current_segments", ["node_a"], {:name=>"current_segments_a_idx"})
+   -> 0.0224s
+-- add_index("current_segments", ["node_b"], {:name=>"current_segments_b_idx"})
+   -> 0.0225s
+-- change_column(:current_segments, :id, :bigint_auto_64)
+   -> 0.0018s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_way_segments", {:id=>false, :force=>true, :options=>""})
+   -> 0.0025s
+-- add_index("current_way_segments", ["segment_id"], {:name=>"current_way_segments_seg_idx"})
+   -> 0.0181s
+-- add_index("current_way_segments", ["id"], {:name=>"current_way_segments_id_idx"})
+   -> 0.0221s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("current_way_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0225s
+-- add_index("current_way_tags", ["id"], {:name=>"current_way_tags_id_idx"})
+   -> 0.0222s
+-- add_fulltext_index("current_way_tags", "v")
+   -> 0.0241s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("current_ways", {:id=>false, :force=>true, :options=>""})
+   -> 0.0233s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("diary_entries", {:id=>false, :force=>true, :options=>""})
+   -> 0.0447s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("friends", {:id=>false, :force=>true, :options=>""})
+   -> 0.0229s
+-- add_index("friends", ["friend_user_id"], {:name=>"user_id_idx"})
+   -> 0.0223s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("gps_points", {:id=>false, :force=>true, :options=>""})
+   -> 0.0030s
+-- add_index("gps_points", ["latitude", "longitude", "user_id"], {:name=>"points_idx"})
+   -> 0.0194s
+-- add_index("gps_points", ["user_id"], {:name=>"points_uid_idx"})
+   -> 0.0225s
+-- add_index("gps_points", ["gpx_id"], {:name=>"points_gpxid_idx"})
+   -> 0.0224s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("gpx_file_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0781s
+-- add_index("gpx_file_tags", ["gpx_id"], {:name=>"gpx_file_tags_gpxid_idx"})
+   -> 0.0222s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("gpx_files", {:id=>false, :force=>true, :options=>""})
+   -> 0.0452s
+-- add_index("gpx_files", ["timestamp"], {:name=>"gpx_files_timestamp_idx"})
+   -> 0.0223s
+-- add_index("gpx_files", ["visible", "public"], {:name=>"gpx_files_visible_public_idx"})
+   -> 0.0225s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("gpx_pending_files", {:id=>false, :force=>true, :options=>""})
+   -> 0.0226s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("messages", {:id=>false, :force=>true, :options=>""})
+   -> 0.0448s
+-- add_index("messages", ["from_display_name"], {:name=>"from_name_idx"})
+   -> 0.0224s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("meta_areas", {:id=>false, :force=>true, :options=>""})
+   -> 0.0227s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("nodes", {:id=>false, :force=>true, :options=>""})
+   -> 0.0227s
+-- add_index("nodes", ["id"], {:name=>"nodes_uid_idx"})
+   -> 0.0220s
+-- add_index("nodes", ["latitude", "longitude"], {:name=>"nodes_latlon_idx"})
+   -> 0.0224s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("segments", {:id=>false, :force=>true, :options=>""})
+   -> 0.0238s
+-- add_index("segments", ["node_a"], {:name=>"street_segments_nodea_idx"})
+   -> 0.0223s
+-- add_index("segments", ["node_b"], {:name=>"street_segments_nodeb_idx"})
+   -> 0.0225s
+-- add_index("segments", ["id"], {:name=>"street_segment_uid_idx"})
+   -> 0.0225s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("users", {:id=>false, :force=>true, :options=>""})
+   -> 0.0453s
+-- add_index("users", ["email"], {:name=>"users_email_idx"})
+   -> 0.0223s
+-- add_index("users", ["display_name"], {:name=>"users_display_name_idx"})
+   -> 0.0226s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("way_segments", {:id=>false, :force=>true, :options=>""})
+   -> 0.0034s
+-- add_primary_key("way_segments", ["id", "version", "sequence_id"])
+   -> 0.0190s
+-- change_column("way_segments", "sequence_id", :bigint_auto_11)
+   -> 0.0022s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("way_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0201s
+-- add_index("way_tags", ["id", "version"], {:name=>"way_tags_id_version_idx"})
+   -> 0.0225s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("ways", {:id=>false, :force=>true, :options=>""})
+   -> 0.0031s
+-- add_primary_key("ways", ["id", "version"])
+   -> 0.0191s
+-- add_index("ways", ["id"], {:name=>"ways_id_version_idx"})
+   -> 0.0230s
+-- change_column("ways", "version", :bigint_auto_20)
+   -> 0.0020s
+== 1 CreateOsmDb: migrated (1.1458s) ==========================================
+
+== 2 CleanupOsmDb: migrating ==================================================
+-- change_column("current_nodes", "latitude", :double, {:null=>false})
+   -> 0.0027s
+-- change_column("current_nodes", "longitude", :double, {:null=>false})
+   -> 0.0020s
+-- change_column("current_nodes", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0011s
+-- change_column("current_nodes", "visible", :boolean, {:null=>false})
+   -> 0.0011s
+-- change_column("current_nodes", "timestamp", :datetime, {:null=>false})
+   -> 0.0017s
+-- add_primary_key("current_nodes", ["id"])
+   -> 0.0184s
+-- remove_index("current_nodes", {:name=>"current_nodes_id_idx"})
+   -> 0.0022s
+-- change_column("current_segments", "node_a", :bigint, {:limit=>64, :null=>false})
+   -> 0.0016s
+-- change_column("current_segments", "node_b", :bigint, {:limit=>64, :null=>false})
+   -> 0.0014s
+-- change_column("current_segments", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0009s
+-- change_column("current_segments", "visible", :boolean, {:null=>false})
+   -> 0.0016s
+-- change_column("current_segments", "timestamp", :datetime, {:null=>false})
+   -> 0.0009s
+-- add_primary_key("current_segments", ["id"])
+   -> 0.0245s
+-- remove_index("current_segments", {:name=>"current_segments_id_visible_idx"})
+   -> 0.0021s
+-- change_column("current_way_segments", "id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0015s
+-- change_column("current_way_segments", "segment_id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0013s
+-- change_column("current_way_segments", "sequence_id", :bigint, {:limit=>11, :null=>false})
+   -> 0.0007s
+-- add_primary_key("current_way_segments", ["id", "sequence_id"])
+   -> 0.0167s
+-- remove_index("current_way_segments", {:name=>"current_way_segments_id_idx"})
+   -> 0.0033s
+-- change_column("current_way_tags", "id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0026s
+-- change_column("current_ways", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0006s
+-- change_column("current_ways", "timestamp", :datetime, {:null=>false})
+   -> 0.0005s
+-- change_column("current_ways", "visible", :boolean, {:null=>false})
+   -> 0.0005s
+-- change_engine("current_ways", "InnoDB")
+   -> 0.0000s
+-- change_column("diary_entries", "title", :string, {:null=>false})
+   -> 0.0006s
+-- change_column("diary_entries", "body", :text, {:null=>false})
+   -> 0.0005s
+-- change_column("diary_entries", "created_at", :datetime, {:null=>false})
+   -> 0.0007s
+-- change_column("diary_entries", "updated_at", :datetime, {:null=>false})
+   -> 0.0006s
+-- add_index("friends", ["user_id"], {:name=>"friends_user_id_idx"})
+   -> 0.0230s
+-- remove_index("gps_points", {:name=>"points_uid_idx"})
+   -> 0.0026s
+-- remove_index("gps_points", {:name=>"points_idx"})
+   -> 0.0019s
+-- remove_column("gps_points", "user_id")
+   -> 0.0006s
+-- add_index("gps_points", ["latitude", "longitude"], {:name=>"points_idx"})
+   -> 0.0172s
+-- change_column("gps_points", "trackid", :integer, {:null=>false})
+   -> 0.0020s
+-- change_column("gps_points", "latitude", :integer, {:null=>false})
+   -> 0.0019s
+-- change_column("gps_points", "longitude", :integer, {:null=>false})
+   -> 0.0018s
+-- change_column("gps_points", "gpx_id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0739s
+-- change_column("gpx_file_tags", "tag", :string, {:null=>false})
+   -> 0.0012s
+-- change_column("gpx_files", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0012s
+-- change_column("gpx_files", "timestamp", :datetime, {:null=>false})
+   -> 0.0017s
+-- change_column("gpx_files", "description", :string, {:default=>"", :null=>false})
+   -> 0.0032s
+-- change_column("gpx_files", "inserted", :boolean, {:null=>false})
+   -> 0.0012s
+-- drop_table("gpx_pending_files")
+   -> 0.0010s
+-- remove_index("messages", {:name=>"from_name_idx"})
+   -> 0.0024s
+-- remove_column("messages", "user_id")
+   -> 0.0006s
+-- remove_column("messages", "from_display_name")
+   -> 0.0007s
+-- change_column("messages", "title", :string, {:null=>false})
+   -> 0.0011s
+-- change_column("messages", "body", :text, {:null=>false})
+   -> 0.0012s
+-- change_column("messages", "sent_on", :datetime, {:null=>false})
+   -> 0.0011s
+-- change_column("messages", "message_read", :boolean, {:default=>false, :null=>false})
+   -> 0.0029s
+-- add_index("messages", ["to_user_id"], {:name=>"messages_to_user_id_idx"})
+   -> 0.0223s
+-- drop_table("meta_areas")
+   -> 0.0012s
+-- change_column("nodes", "id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0015s
+-- change_column("nodes", "latitude", :double, {:null=>false})
+   -> 0.0015s
+-- change_column("nodes", "longitude", :double, {:null=>false})
+   -> 0.0014s
+-- change_column("nodes", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0008s
+-- change_column("nodes", "visible", :boolean, {:null=>false})
+   -> 0.0008s
+-- change_column("nodes", "timestamp", :datetime, {:null=>false})
+   -> 0.0011s
+-- add_index("nodes", ["timestamp"], {:name=>"nodes_timestamp_idx"})
+   -> 0.0256s
+-- change_column("segments", "id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0019s
+-- change_column("segments", "node_a", :bigint, {:limit=>64, :null=>false})
+   -> 0.0014s
+-- change_column("segments", "node_b", :bigint, {:limit=>64, :null=>false})
+   -> 0.0015s
+-- change_column("segments", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0013s
+-- change_column("segments", "visible", :boolean, {:null=>false})
+   -> 0.0010s
+-- change_column("segments", "timestamp", :datetime, {:null=>false})
+   -> 0.0010s
+-- add_index("segments", ["timestamp"], {:name=>"segments_timestamp_idx"})
+   -> 0.0252s
+-- remove_column("users", "preferences")
+   -> 0.0009s
+-- change_column("users", "email", :string, {:null=>false})
+   -> 0.0016s
+-- change_column("users", "pass_crypt", :string, {:null=>false})
+   -> 0.0009s
+-- change_column("users", "creation_time", :datetime, {:null=>false})
+   -> 0.0008s
+-- change_column("users", "display_name", :string, {:default=>"", :null=>false})
+   -> 0.0034s
+-- change_column("users", "data_public", :boolean, {:default=>false, :null=>false})
+   -> 0.0023s
+-- change_column("users", "home_lat", :double, {:default=>nil})
+   -> 0.0016s
+-- change_column("users", "home_lon", :double, {:default=>nil})
+   -> 0.0017s
+-- remove_index("users", {:name=>"users_email_idx"})
+   -> 0.0022s
+-- add_index("users", ["email"], {:name=>"users_email_idx", :unique=>true})
+   -> 0.0190s
+-- remove_index("users", {:name=>"users_display_name_idx"})
+   -> 0.0022s
+-- add_index("users", ["display_name"], {:name=>"users_display_name_idx", :unique=>true})
+   -> 0.0203s
+-- change_column("way_segments", "segment_id", :bigint, {:limit=>64, :null=>false})
+   -> 0.0459s
+-- change_column("way_tags", "k", :string, {:null=>false})
+   -> 0.0009s
+-- change_column("way_tags", "v", :string, {:null=>false})
+   -> 0.0008s
+-- change_column("way_tags", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0016s
+-- change_column("ways", "user_id", :bigint, {:limit=>20, :null=>false})
+   -> 0.0008s
+-- change_column("ways", "timestamp", :datetime, {:null=>false})
+   -> 0.0008s
+-- change_column("ways", "visible", :boolean, {:default=>true, :null=>false})
+   -> 0.0027s
+-- remove_index("ways", {:name=>"ways_id_version_idx"})
+   -> 0.0022s
+-- add_index("ways", ["timestamp"], {:name=>"ways_timestamp_idx"})
+   -> 0.0225s
+== 2 CleanupOsmDb: migrated (0.4674s) =========================================
+
+== 3 SqlSessionStoreSetup: migrating ==========================================
+-- innodb_option()
+   -> 0.0000s
+-- create_table("sessions", {:options=>""})
+   -> 0.0436s
+-- add_index("sessions", ["session_id"], {:name=>"sessions_session_id_idx", :unique=>true})
+   -> 0.0222s
+== 3 SqlSessionStoreSetup: migrated (0.0661s) =================================
+
+== 4 UserEnhancements: migrating ==============================================
+-- add_column("diary_entries", "latitude", :double)
+   -> 0.0012s
+-- add_column("diary_entries", "longitude", :double)
+   -> 0.0006s
+-- add_column("diary_entries", "language", :string, {:limit=>3})
+   -> 0.0007s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("user_preferences", {:id=>false, :force=>true, :options=>""})
+   -> 0.0199s
+-- add_primary_key("user_preferences", ["user_id", "k"])
+   -> 0.0224s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("user_tokens", {:id=>false, :force=>true, :options=>""})
+   -> 0.0223s
+-- add_index("user_tokens", ["token"], {:name=>"user_tokens_token_idx", :unique=>true})
+   -> 0.0226s
+-- add_index("user_tokens", ["user_id"], {:name=>"user_tokens_user_id_idx"})
+   -> 0.0225s
+-- remove_column("users", "token")
+   -> 0.0006s
+-- remove_column("users", "timeout")
+   -> 0.0006s
+-- remove_column("users", "within_lon")
+   -> 0.0005s
+-- remove_column("users", "within_lat")
+   -> 0.0004s
+-- add_column("users", "nearby", :integer, {:default=>50})
+   -> 0.0943s
+-- add_column("users", "pass_salt", :string)
+   -> 0.0009s
+== 4 UserEnhancements: migrated (0.2865s) =====================================
+
+== 5 TileTracepoints: migrating ===============================================
+-- add_column("gps_points", "tile", :four_byte_unsigned)
+   -> 0.0012s
+-- add_index("gps_points", ["tile"], {:name=>"points_tile_idx"})
+   -> 0.0167s
+-- remove_index("gps_points", {:name=>"points_idx"})
+   -> 0.0030s
+== 5 TileTracepoints: migrated (0.0720s) ======================================
+
+== 6 TileNodes: migrating =====================================================
+-- remove_index("current_nodes", {:name=>"current_nodes_timestamp_idx"})
+   -> 0.0016s
+-- rename_table("current_nodes", "current_nodes_v5")
+   -> 0.0073s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_nodes", {:id=>false, :force=>true, :options=>""})
+   -> 0.0503s
+-- add_index("current_nodes", ["timestamp"], {:name=>"current_nodes_timestamp_idx"})
+   -> 0.0223s
+-- add_index("current_nodes", ["tile"], {:name=>"current_nodes_tile_idx"})
+   -> 0.0228s
+-- change_column("current_nodes", "tile", :four_byte_unsigned)
+   -> 0.0925s
+-- execute("      INSERT INTO current_nodes (id, latitude, longitude, user_id, visible, tags, timestamp, tile)\n      SELECT id, ROUND(latitude * 10000000), ROUND(longitude * 10000000),\n             user_id, visible, tags, timestamp, 0\n      FROM current_nodes_v5\n")
+   -> 0.0016s
+-- drop_table("current_nodes_v5")
+   -> 0.0015s
+-- remove_index("nodes", {:name=>"nodes_uid_idx"})
+   -> 0.0019s
+-- remove_index("nodes", {:name=>"nodes_timestamp_idx"})
+   -> 0.0017s
+-- rename_table("nodes", "nodes_v5")
+   -> 0.0058s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("nodes", {:id=>false, :force=>true, :options=>""})
+   -> 0.0282s
+-- add_index("nodes", ["id"], {:name=>"nodes_uid_idx"})
+   -> 0.0223s
+-- add_index("nodes", ["timestamp"], {:name=>"nodes_timestamp_idx"})
+   -> 0.0225s
+-- add_index("nodes", ["tile"], {:name=>"nodes_tile_idx"})
+   -> 0.0226s
+-- change_column("nodes", "tile", :four_byte_unsigned)
+   -> 0.1351s
+-- execute("      INSERT INTO nodes (id, latitude, longitude, user_id, visible, tags, timestamp, tile)\n      SELECT id, ROUND(latitude * 10000000), ROUND(longitude * 10000000),\n             user_id, visible, tags, timestamp, 0\n      FROM nodes_v5\n")
+   -> 0.0012s
+-- drop_table("nodes_v5")
+   -> 0.0014s
+== 6 TileNodes: migrated (0.5247s) ============================================
+
+== 7 AddRelations: migrating ==================================================
+-- create_enumeration(:nwr_enum, ["Node", "Way", "Relation"])
+   -> 0.0016s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_relation_members", {:id=>false, :force=>true, :options=>""})
+   -> 0.0029s
+-- add_primary_key("current_relation_members", ["id", "member_type", "member_id", "member_role"])
+   -> 0.0215s
+-- add_index("current_relation_members", ["member_type", "member_id"], {:name=>"current_relation_members_member_idx"})
+   -> 0.0224s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("current_relation_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0227s
+-- add_index("current_relation_tags", ["id"], {:name=>"current_relation_tags_id_idx"})
+   -> 0.0224s
+-- add_fulltext_index("current_relation_tags", "v")
+   -> 0.0225s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("current_relations", {:id=>false, :force=>true, :options=>""})
+   -> 0.0225s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("relation_members", {:id=>false, :force=>true, :options=>""})
+   -> 0.0029s
+-- add_primary_key("relation_members", ["id", "version", "member_type", "member_id", "member_role"])
+   -> 0.0194s
+-- add_index("relation_members", ["member_type", "member_id"], {:name=>"relation_members_member_idx"})
+   -> 0.0225s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("relation_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0227s
+-- add_index("relation_tags", ["id", "version"], {:name=>"relation_tags_id_version_idx"})
+   -> 0.0225s
+-- myisam_table()
+   -> 0.0000s
+-- create_table("relations", {:id=>false, :force=>true, :options=>""})
+   -> 0.0031s
+-- add_primary_key("relations", ["id", "version"])
+   -> 0.0204s
+-- add_index("relations", ["timestamp"], {:name=>"relations_timestamp_idx"})
+   -> 0.0224s
+-- change_column("relations", "version", :bigint_auto_20)
+   -> 0.0020s
+== 7 AddRelations: migrated (0.2781s) =========================================
+
+== 8 RemoveSegments: migrating ================================================
+-- select_value("SELECT count(*) FROM current_segments")
+   -> 0.0011s
+-- drop_table(:segments)
+   -> 0.0019s
+-- drop_table(:way_segments)
+   -> 0.0012s
+-- myisam_table()
+   -> 0.0000s
+-- create_table(:way_nodes, {:id=>false, :force=>true, :options=>""})
+   -> 0.0026s
+-- add_primary_key(:way_nodes, [:id, :version, :sequence_id])
+   -> 0.0266s
+-- drop_table(:current_segments)
+   -> 0.0021s
+-- drop_table(:current_way_segments)
+   -> 0.0010s
+-- innodb_table()
+   -> 0.0000s
+-- create_table(:current_way_nodes, {:id=>false, :force=>true, :options=>""})
+   -> 0.0026s
+-- add_primary_key(:current_way_nodes, [:id, :sequence_id])
+   -> 0.0168s
+-- add_index(:current_way_nodes, [:node_id], {:name=>"current_way_nodes_node_idx"})
+   -> 0.0223s
+-- execute("TRUNCATE way_tags")
+   -> 0.0450s
+-- execute("TRUNCATE ways")
+   -> 0.0452s
+-- execute("TRUNCATE current_way_tags")
+   -> 0.0676s
+-- execute("TRUNCATE current_ways")
+   -> 0.0227s
+== 8 RemoveSegments: migrated (0.2599s) =======================================
+
+== 9 WayNodesNodeIdx: migrating ===============================================
+-- add_index("way_nodes", ["node_id"], {:name=>"way_nodes_node_idx"})
+   -> 0.0210s
+== 9 WayNodesNodeIdx: migrated (0.0211s) ======================================
+
+== 10 DiaryComments: migrating ================================================
+-- myisam_table()
+   -> 0.0000s
+-- create_table("diary_comments", {:id=>false, :force=>true, :options=>""})
+   -> 0.0848s
+-- add_index("diary_comments", ["diary_entry_id", "id"], {:name=>"diary_comments_entry_id_idx", :unique=>true})
+   -> 0.0562s
+== 10 DiaryComments: migrated (0.1414s) =======================================
+
+== 11 AddUserImage: migrating =================================================
+-- add_column("users", "image", :text)
+   -> 0.0010s
+== 11 AddUserImage: migrated (0.0010s) ========================================
+
+== 12 AddAdminFlag: migrating =================================================
+-- add_column("users", "administrator", :boolean, {:default=>false, :null=>false})
+   -> 0.0915s
+== 12 AddAdminFlag: migrated (0.0916s) ========================================
+
+== 13 AddEmailValid: migrating ================================================
+-- add_column("users", "email_valid", :boolean, {:default=>false, :null=>false})
+   -> 0.0956s
+== 13 AddEmailValid: migrated (0.0973s) =======================================
+
+== 14 AddNewEmail: migrating ==================================================
+-- add_column("users", "new_email", :string)
+   -> 0.0013s
+== 14 AddNewEmail: migrated (0.0014s) =========================================
+
+== 15 AddUserVisible: migrating ===============================================
+-- add_column("users", "visible", :boolean, {:default=>true, :null=>false})
+   -> 0.0875s
+== 15 AddUserVisible: migrated (0.0921s) ======================================
+
+== 16 AddCreationIp: migrating ================================================
+-- add_column("users", "creation_ip", :string)
+   -> 0.0014s
+== 16 AddCreationIp: migrated (0.0015s) =======================================
+
+== 17 AddGpxIndexes: migrating ================================================
+-- add_index("gpx_files", ["user_id"], {:name=>"gpx_files_user_id_idx"})
+   -> 0.0252s
+-- add_index("gpx_file_tags", ["tag"], {:name=>"gpx_file_tags_tag_idx"})
+   -> 0.0222s
+== 17 AddGpxIndexes: migrated (0.0477s) =======================================
+
+== 18 CreateAcls: migrating ===================================================
+-- myisam_table()
+   -> 0.0000s
+-- create_table("acls", {:id=>false, :force=>true, :options=>""})
+   -> 0.0462s
+-- add_index("acls", ["k"], {:name=>"acls_k_idx"})
+   -> 0.0226s
+== 18 CreateAcls: migrated (0.0692s) ==========================================
+
+== 19 AddTimestampIndexes: migrating ==========================================
+-- add_index(:current_ways, :timestamp, {:name=>:current_ways_timestamp_idx})
+   -> 0.0239s
+-- add_index(:current_relations, :timestamp, {:name=>:current_relations_timestamp_idx})
+   -> 0.0225s
+== 19 AddTimestampIndexes: migrated (0.0466s) =================================
+
+== 20 PopulateNodeTagsAndRemove: migrating ====================================
+-- select_value("SELECT count(*) FROM current_nodes")
+   -> 0.0009s
+-- execute("TRUNCATE nodes")
+   -> 0.0901s
+-- remove_column(:nodes, :tags)
+   -> 0.0013s
+-- remove_column(:current_nodes, :tags)
+   -> 0.0009s
+-- add_column(:nodes, :version, :bigint, {:limit=>20, :null=>false})
+   -> 0.0009s
+-- innodb_table()
+   -> 0.0000s
+-- create_table(:current_node_tags, {:id=>false, :force=>true, :options=>""})
+   -> 0.0192s
+-- innodb_table()
+   -> 0.0000s
+-- create_table(:node_tags, {:id=>false, :force=>true, :options=>""})
+   -> 0.0227s
+== 20 PopulateNodeTagsAndRemove: migrated (0.1368s) ===========================
+
+== 21 MoveToInnodb: migrating =================================================
+-- remove_index(:current_way_tags, {:name=>:current_way_tags_v_idx})
+   -> 0.0025s
+-- remove_index(:current_relation_tags, {:name=>:current_relation_tags_v_idx})
+   -> 0.0020s
+-- change_column("nodes", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0014s
+-- change_column("ways", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0021s
+-- change_column("relations", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0020s
+-- change_engine("nodes", "InnoDB")
+   -> 0.0000s
+-- change_engine("ways", "InnoDB")
+   -> 0.0000s
+-- change_engine("way_tags", "InnoDB")
+   -> 0.0000s
+-- change_engine("way_nodes", "InnoDB")
+   -> 0.0000s
+-- change_engine("current_way_tags", "InnoDB")
+   -> 0.0000s
+-- change_engine("relation_members", "InnoDB")
+   -> 0.0000s
+-- change_engine("relations", "InnoDB")
+   -> 0.0000s
+-- change_engine("relation_tags", "InnoDB")
+   -> 0.0000s
+-- change_engine("current_relation_tags", "InnoDB")
+   -> 0.0000s
+-- add_column("current_nodes", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0008s
+-- add_column("current_ways", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0008s
+-- add_column("current_relations", "version", :bigint, {:limit=>20, :null=>false})
+   -> 0.0006s
+== 21 MoveToInnodb: migrated (0.1000s) ========================================
+
+== 22 KeyConstraints: migrating ===============================================
+-- add_primary_key(:current_node_tags, [:id, :k])
+   -> 0.0218s
+-- add_primary_key(:current_way_tags, [:id, :k])
+   -> 0.0227s
+-- add_primary_key(:current_relation_tags, [:id, :k])
+   -> 0.0236s
+-- add_primary_key(:node_tags, [:id, :version, :k])
+   -> 0.0225s
+-- add_primary_key(:way_tags, [:id, :version, :k])
+   -> 0.0225s
+-- add_primary_key(:relation_tags, [:id, :version, :k])
+   -> 0.0224s
+-- add_primary_key(:nodes, [:id, :version])
+   -> 0.0225s
+-- remove_index(:current_way_tags, {:name=>:current_way_tags_id_idx})
+   -> 0.0025s
+-- remove_index(:current_relation_tags, {:name=>:current_relation_tags_id_idx})
+   -> 0.0019s
+-- remove_index(:way_tags, {:name=>:way_tags_id_version_idx})
+   -> 0.0018s
+-- remove_index(:relation_tags, {:name=>:relation_tags_id_version_idx})
+   -> 0.0019s
+-- remove_index(:nodes, {:name=>:nodes_uid_idx})
+   -> 0.0018s
+-- add_foreign_key(:current_node_tags, [:id], :current_nodes)
+   -> 0.0029s
+-- add_foreign_key(:node_tags, [:id, :version], :nodes)
+   -> 0.0020s
+-- add_foreign_key(:current_way_tags, [:id], :current_ways)
+   -> 0.0019s
+-- add_foreign_key(:current_way_nodes, [:id], :current_ways)
+   -> 0.0020s
+-- add_foreign_key(:way_tags, [:id, :version], :ways)
+   -> 0.0021s
+-- add_foreign_key(:way_nodes, [:id, :version], :ways)
+   -> 0.0020s
+-- add_foreign_key(:current_relation_tags, [:id], :current_relations)
+   -> 0.0019s
+-- add_foreign_key(:current_relation_members, [:id], :current_relations)
+   -> 0.0019s
+-- add_foreign_key(:relation_tags, [:id, :version], :relations)
+   -> 0.0022s
+-- add_foreign_key(:relation_members, [:id, :version], :relations)
+   -> 0.0022s
+-- add_foreign_key(:current_way_nodes, [:node_id], :current_nodes, [:id])
+   -> 0.0017s
+== 22 KeyConstraints: migrated (0.1924s) ======================================
+
+== 23 AddChangesets: migrating ================================================
+-- innodb_table()
+   -> 0.0000s
+-- create_table("changesets", {:id=>false, :force=>true, :options=>""})
+   -> 0.0300s
+-- innodb_table()
+   -> 0.0000s
+-- create_table("changeset_tags", {:id=>false, :force=>true, :options=>""})
+   -> 0.0229s
+-- add_index("changeset_tags", ["id"], {:name=>"changeset_tags_id_idx"})
+   -> 0.0222s
+-- execute("INSERT INTO changesets (id, user_id, created_at, open)SELECT id, id, creation_time, false from users;")
+   -> 0.0009s
+-- rename_column("current_nodes", :user_id, :changeset_id)
+   -> 0.0025s
+-- add_foreign_key("current_nodes", [:changeset_id], :changesets, [:id])
+   -> 0.0011s
+-- rename_column("current_relations", :user_id, :changeset_id)
+   -> 0.0017s
+-- add_foreign_key("current_relations", [:changeset_id], :changesets, [:id])
+   -> 0.0009s
+-- rename_column("current_ways", :user_id, :changeset_id)
+   -> 0.0018s
+-- add_foreign_key("current_ways", [:changeset_id], :changesets, [:id])
+   -> 0.0017s
+-- rename_column("nodes", :user_id, :changeset_id)
+   -> 0.0028s
+-- add_foreign_key("nodes", [:changeset_id], :changesets, [:id])
+   -> 0.0014s
+-- rename_column("relations", :user_id, :changeset_id)
+   -> 0.0023s
+-- add_foreign_key("relations", [:changeset_id], :changesets, [:id])
+   -> 0.0014s
+-- rename_column("ways", :user_id, :changeset_id)
+   -> 0.0027s
+-- add_foreign_key("ways", [:changeset_id], :changesets, [:id])
+   -> 0.0016s
+== 23 AddChangesets: migrated (0.0992s) =======================================
+
+== 24 OrderRelationMembers: migrating =========================================
+-- add_column(:relation_members, :sequence_id, :integer, {:default=>0, :null=>false})
+   -> 0.0655s
+-- execute("update relation_members set sequence_id = mod(member_id, 16384)")
+   -> 0.0010s
+-- alter_primary_key("relation_members", [:id, :version, :member_type, :member_id, :member_role, :sequence_id])
+   -> 0.0213s
+-- add_column(:current_relation_members, :sequence_id, :integer, {:default=>0, :null=>false})
+   -> 0.0680s
+-- execute("update current_relation_members set sequence_id = mod(member_id, 16384)")
+   -> 0.0011s
+-- alter_primary_key("current_relation_members", [:id, :member_type, :member_id, :member_role, :sequence_id])
+   -> 0.0207s
+== 24 OrderRelationMembers: migrated (0.1782s) ================================
+
+== 25 AddEndTimeToChangesets: migrating =======================================
+-- add_column(:changesets, :closed_at, :datetime, {:null=>false})
+   -> 0.0010s
+-- interval_constant("1 hour")
+   -> 0.0000s
+-- execute("update changesets set closed_at=(now()-'1 hour'::interval) where open=(1=0)")
+   -> 0.0008s
+-- interval_constant("1 hour")
+   -> 0.0000s
+-- execute("update changesets set closed_at=(now()+'1 hour'::interval) where open=(1=1)")
+   -> 0.0005s
+-- remove_column(:changesets, :open)
+   -> 0.0007s
+-- add_column(:changesets, :num_changes, :integer, {:null=>false, :default=>0})
+   -> 0.0470s
+== 25 AddEndTimeToChangesets: migrated (0.0502s) ==============================
+
+== 26 AddChangesetUserIndex: migrating ========================================
+-- add_index("changesets", ["user_id"], {:name=>"changesets_user_id_idx"})
+   -> 0.0217s
+== 26 AddChangesetUserIndex: migrated (0.0219s) ===============================
+
+== 27 AddChangesetIndexes: migrating ==========================================
+-- add_index("nodes", ["changeset_id"], {:name=>"nodes_changeset_id_idx"})
+   -> 0.0247s
+-- add_index("ways", ["changeset_id"], {:name=>"ways_changeset_id_idx"})
+   -> 0.0224s
+-- add_index("relations", ["changeset_id"], {:name=>"relations_changeset_id_idx"})
+   -> 0.0224s
+== 27 AddChangesetIndexes: migrated (0.0698s) =================================
+
+== 28 AddMoreChangesetIndexes: migrating ======================================
+-- add_index("changesets", ["created_at"], {:name=>"changesets_created_at_idx"})
+   -> 0.0263s
+-- add_index("changesets", ["closed_at"], {:name=>"changesets_closed_at_idx"})
+   -> 0.0241s
+-- add_index("changesets", ["min_lat", "max_lat", "min_lon", "max_lon"], {:name=>"changesets_bbox_idx", :method=>"GIST"})
+   -> 0.0028s
+== 28 AddMoreChangesetIndexes: migrated (0.0534s) =============================
+
+== 29 AddUserForeignKeys: migrating ===========================================
+-- add_foreign_key(:changesets, [:user_id], :users, [:id])
+   -> 0.0023s
+-- add_foreign_key(:diary_comments, [:user_id], :users, [:id])
+   -> 0.0019s
+-- add_foreign_key(:diary_entries, [:user_id], :users, [:id])
+   -> 0.0020s
+-- add_foreign_key(:friends, [:user_id], :users, [:id])
+   -> 0.0021s
+-- add_foreign_key(:friends, [:friend_user_id], :users, [:id])
+   -> 0.0018s
+-- add_foreign_key(:gpx_files, [:user_id], :users, [:id])
+   -> 0.0021s
+-- add_foreign_key(:messages, [:from_user_id], :users, [:id])
+   -> 0.0020s
+-- add_foreign_key(:messages, [:to_user_id], :users, [:id])
+   -> 0.0023s
+-- add_foreign_key(:user_preferences, [:user_id], :users, [:id])
+   -> 0.0020s
+-- add_foreign_key(:user_tokens, [:user_id], :users, [:id])
+   -> 0.0022s
+== 29 AddUserForeignKeys: migrated (0.0214s) ==================================
+
+== 30 AddForeignKeys: migrating ===============================================
+-- add_foreign_key(:changeset_tags, [:id], :changesets)
+   -> 0.0025s
+-- add_foreign_key(:diary_comments, [:diary_entry_id], :diary_entries, [:id])
+   -> 0.0019s
+-- add_foreign_key(:gps_points, [:gpx_id], :gpx_files, [:id])
+   -> 0.0019s
+-- add_foreign_key(:gpx_file_tags, [:gpx_id], :gpx_files, [:id])
+   -> 0.0025s
+== 30 AddForeignKeys: migrated (0.0091s) ======================================
+
+== 31 CreateCountries: migrating ==============================================
+-- innodb_table()
+   -> 0.0000s
+-- create_table(:countries, {:id=>false, :force=>true, :options=>""})
+   -> 0.0232s
+-- add_index(:countries, [:code], {:name=>"countries_code_idx", :unique=>true})
+   -> 0.0224s
+== 31 CreateCountries: migrated (0.0458s) =====================================
+
+== 32 AddUserLocale: migrating ================================================
+-- add_column("users", "locale", :string)
+   -> 0.0013s
+== 32 AddUserLocale: migrated (0.0014s) =======================================
+
+== 33 ChangeDiaryEntriesLanguage: migrating ===================================
+-- remove_column("diary_entries", "language")
+   -> 0.0010s
+-- add_column("diary_entries", "language_code", :string, {:null=>false, :default=>"en"})
+   -> 0.0456s
+== 33 ChangeDiaryEntriesLanguage: migrated (0.0468s) ==========================
+
+== 34 CreateLanguages: migrating ==============================================
+-- innodb_table()
+   -> 0.0000s
+-- create_table(:languages, {:id=>false, :force=>true, :options=>""})
+   -> 0.0873s
+-- add_primary_key(:languages, [:code])
+   -> 0.0225s
+-- add_foreign_key(:users, [:locale], :languages, [:code])
+   -> 0.0022s
+-- add_foreign_key(:diary_entries, [:language_code], :languages, [:code])
+   -> 0.0017s
+== 34 CreateLanguages: migrated (0.5179s) =====================================
+
+== 35 ChangeUserLocale: migrating =============================================
+-- remove_foreign_key(:users, [:locale], :languages, [:code])
+   -> 0.0011s
+-- rename_column(:users, :locale, :languages)
+   -> 0.0035s
+== 35 ChangeUserLocale: migrated (0.0047s) ====================================
+
+== 36 AddVisibleToMessage: migrating ==========================================
+-- add_column(:messages, :visible, :boolean, {:default=>true, :null=>false})
+   -> 0.0652s
+== 36 AddVisibleToMessage: migrated (0.0653s) =================================
+
+== 37 AddSenderVisibleToMessage: migrating ====================================
+-- rename_column(:messages, :visible, :to_user_visible)
+   -> 0.0032s
+-- add_column(:messages, :from_user_visible, :boolean, {:default=>true, :null=>false})
+   -> 0.0651s
+== 37 AddSenderVisibleToMessage: migrated (0.0686s) ===========================
+
+== 38 AddMessageSenderIndex: migrating ========================================
+-- add_index(:messages, [:from_user_id], {:name=>"messages_from_user_id_idx"})
+   -> 0.0246s
+== 38 AddMessageSenderIndex: migrated (0.0247s) ===============================
+
+== 39 AddMoreControlsToGpxFiles: migrating ====================================
+-- create_enumeration(:gpx_visibility_enum, ["private", "public", "trackable", "identifiable"])
+   -> 0.0011s
+-- add_column(:gpx_files, :visibility, :gpx_visibility_enum, {:default=>"public", :null=>false})
+   -> 0.1141s
+-- add_index(:gpx_files, [:visible, :visibility], {:name=>"gpx_files_visible_visibility_idx"})
+   -> 0.0167s
+-- remove_index(:gpx_files, {:name=>"gpx_files_visible_public_idx"})
+   -> 0.0023s
+-- remove_column(:gpx_files, :public)
+   -> 0.0008s
+== 39 AddMoreControlsToGpxFiles: migrated (0.2066s) ===========================
+
+== 40 CreateOauthTables: migrating ============================================
+-- create_table(:client_applications)
+   -> 0.0447s
+-- add_index(:client_applications, :key, {:unique=>true})
+   -> 0.0219s
+-- create_table(:oauth_tokens)
+   -> 0.0232s
+-- add_index(:oauth_tokens, :token, {:unique=>true})
+   -> 0.0222s
+-- create_table(:oauth_nonces)
+   -> 0.0231s
+-- add_index(:oauth_nonces, [:nonce, :timestamp], {:unique=>true})
+   -> 0.0223s
+== 40 CreateOauthTables: migrated (0.1579s) ===================================
+
+== 41 AddFineOAuthPermissions: migrating ======================================
+-- add_column(:oauth_tokens, :allow_read_prefs, :boolean, {:null=>false, :default=>false})
+   -> 0.0706s
+-- add_column(:client_applications, :allow_read_prefs, :boolean, {:null=>false, :default=>false})
+   -> 0.0684s
+-- add_column(:oauth_tokens, :allow_write_prefs, :boolean, {:null=>false, :default=>false})
+   -> 0.0669s
+-- add_column(:client_applications, :allow_write_prefs, :boolean, {:null=>false, :default=>false})
+   -> 0.0681s
+-- add_column(:oauth_tokens, :allow_write_diary, :boolean, {:null=>false, :default=>false})
+   -> 0.0669s
+-- add_column(:client_applications, :allow_write_diary, :boolean, {:null=>false, :default=>false})
+   -> 0.0684s
+-- add_column(:oauth_tokens, :allow_write_api, :boolean, {:null=>false, :default=>false})
+   -> 0.1345s
+-- add_column(:client_applications, :allow_write_api, :boolean, {:null=>false, :default=>false})
+   -> 0.0683s
+-- add_column(:oauth_tokens, :allow_read_gpx, :boolean, {:null=>false, :default=>false})
+   -> 0.0668s
+-- add_column(:client_applications, :allow_read_gpx, :boolean, {:null=>false, :default=>false})
+   -> 0.0687s
+-- add_column(:oauth_tokens, :allow_write_gpx, :boolean, {:null=>false, :default=>false})
+   -> 0.0665s
+-- add_column(:client_applications, :allow_write_gpx, :boolean, {:null=>false, :default=>false})
+   -> 0.0684s
+== 41 AddFineOAuthPermissions: migrated (0.8839s) =============================
+
+== 42 AddForeignKeysToOauthTables: migrating ==================================
+-- add_foreign_key(:oauth_tokens, [:user_id], :users, [:id])
+   -> 0.0032s
+-- add_foreign_key(:oauth_tokens, [:client_application_id], :client_applications, [:id])
+   -> 0.0021s
+-- add_foreign_key(:client_applications, [:user_id], :users, [:id])
+   -> 0.0008s
+== 42 AddForeignKeysToOauthTables: migrated (0.0063s) =========================
+
+== 43 AddRefererToUserToken: migrating ========================================
+-- add_column(:user_tokens, :referer, :text)
+   -> 0.0220s
+== 43 AddRefererToUserToken: migrated (0.0221s) ===============================
+
+== 44 CreateUserRoles: migrating ==============================================
+-- create_enumeration(:user_role_enum, ["administrator", "moderator"])
+   -> 0.0008s
+-- create_table(:user_roles)
+   -> 0.0225s
+-- add_column(:user_roles, :role, :user_role_enum, {:null=>false})
+   -> 0.0011s
+-- remove_column(:users, :administrator)
+   -> 0.0008s
+-- add_foreign_key(:user_roles, [:user_id], :users, [:id])
+   -> 0.0019s
+== 44 CreateUserRoles: migrated (0.0288s) =====================================
+
+== 45 CreateUserBlocks: migrating =============================================
+-- create_table(:user_blocks)
+   -> 0.0526s
+-- add_foreign_key(:user_blocks, [:user_id], :users, [:id])
+   -> 0.0024s
+-- add_foreign_key(:user_blocks, [:moderator_id], :users, [:id])
+   -> 0.0016s
+-- add_foreign_key(:user_blocks, [:revoker_id], :users, [:id])
+   -> 0.0018s
+-- add_index(:user_blocks, [:user_id])
+   -> 0.0166s
+== 45 CreateUserBlocks: migrated (0.0753s) ====================================
+
+== 46 AlterUserRolesAndBlocks: migrating ======================================
+-- add_column(:user_roles, :granter_id, :bigint)
+   -> 0.0013s
+-- change_column(:user_roles, :granter_id, :bigint, {:null=>false})
+   -> 0.0014s
+-- add_foreign_key(:user_roles, [:granter_id], :users, [:id])
+   -> 0.0022s
+-- add_index(:user_roles, [:user_id, :role], {:name=>"user_roles_id_role_unique", :unique=>true})
+   -> 0.0209s
+-- rename_column(:user_blocks, :moderator_id, :creator_id)
+   -> 0.0029s
+-- rename_column(:user_blocks, :end_at, :ends_at)
+   -> 0.0022s
+== 46 AlterUserRolesAndBlocks: migrated (0.0392s) =============================
+
+== 47 AddVisibleToDiaries: migrating ==========================================
+-- add_column(:diary_entries, :visible, :boolean, {:null=>false, :default=>true})
+   -> 0.0518s
+-- add_column(:diary_comments, :visible, :boolean, {:null=>false, :default=>true})
+   -> 0.0675s
+== 47 AddVisibleToDiaries: migrated (0.1195s) =================================
+
+== 48 AddDiaryCreationIndexes: migrating ======================================
+-- add_index(:diary_entries, [:created_at], {:name=>"diary_entry_created_at_index"})
+   -> 0.0192s
+-- add_index(:diary_entries, [:user_id, :created_at], {:name=>"diary_entry_user_id_created_at_index"})
+   -> 0.0225s
+-- add_index(:diary_entries, [:language_code, :created_at], {:name=>"diary_entry_language_code_created_at_index"})
+   -> 0.0225s
+== 48 AddDiaryCreationIndexes: migrated (0.0645s) =============================
+
+== 49 ImproveChangesetUserIndex: migrating ====================================
+-- add_index(:changesets, [:user_id, :id], {:name=>"changesets_user_id_id_idx"})
+   -> 0.0269s
+-- remove_index(:changesets, {:name=>"changesets_user_id_idx"})
+   -> 0.0025s
+== 49 ImproveChangesetUserIndex: migrated (0.0296s) ===========================
+
+== 50 AddUserIndexToDiaryComments: migrating ==================================
+-- add_index(:diary_comments, [:user_id, :created_at], {:name=>"diary_comment_user_id_created_at_index"})
+   -> 0.0203s
+== 50 AddUserIndexToDiaryComments: migrated (0.0204s) =========================
+
+== 51 AddStatusToUser: migrating ==============================================
+-- create_enumeration(:user_status_enum, ["pending", "active", "confirmed", "suspended", "deleted"])
+   -> 0.0011s
+-- add_column(:users, :status, :user_status_enum, {:null=>false, :default=>"pending"})
+   -> 0.0993s
+-- remove_column(:users, :active)
+   -> 0.0008s
+-- remove_column(:users, :visible)
+   -> 0.0007s
+== 51 AddStatusToUser: migrated (0.1052s) =====================================
+
+== 52 AddContributorTermsToUser: migrating ====================================
+-- add_column(:users, :terms_agreed, :datetime)
+   -> 0.0012s
+-- add_column(:users, :consider_pd, :boolean, {:null=>false, :default=>false})
+   -> 0.0961s
+== 52 AddContributorTermsToUser: migrated (0.0975s) ===========================
+
+== 53 AddMapBugTables: migrating ==============================================
+-- create_enumeration(:map_bug_status_enum, ["open", "closed", "hidden"])
+   -> 0.0010s
+-- create_table(:map_bugs)
+   -> 0.0526s
+-- change_column(:map_bugs, :id, :bigint)
+   -> 0.0467s
+-- add_index(:map_bugs, [:tile, :status], {:name=>"map_bugs_tile_idx"})
+   -> 0.0214s
+-- add_index(:map_bugs, [:last_changed], {:name=>"map_bugs_changed_idx"})
+   -> 0.0226s
+-- add_index(:map_bugs, [:date_created], {:name=>"map_bugs_created_idx"})
+   -> 0.0223s
+== 53 AddMapBugTables: migrated (0.1672s) =====================================
+
+== 54 RefactorMapBugTables: migrating =========================================
+-- create_table(:map_bug_comment)
+   -> 0.0454s
+-- remove_column(:map_bugs, :text)
+   -> 0.0008s
+-- change_column(:map_bug_comment, :id, :bigint)
+   -> 0.0455s
+-- add_index(:map_bug_comment, [:bug_id], {:name=>"map_bug_comment_id_idx"})
+   -> 0.0211s
+-- add_foreign_key(:map_bug_comment, [:bug_id], :map_bugs, [:id])
+   -> 0.0025s
+-- add_foreign_key(:map_bug_comment, [:commenter_id], :users, [:id])
+   -> 0.0021s
+== 54 RefactorMapBugTables: migrated (0.1177s) ================================
+
+== 55 ChangeMapBugCommentType: migrating ======================================
+-- change_column(:map_bug_comment, :comment, :text)
+   -> 0.0012s
+== 55 ChangeMapBugCommentType: migrated (0.0013s) =============================
+
+== 56 AddDateClosed: migrating ================================================
+-- add_column(:map_bugs, :date_closed, :timestamp)
+   -> 0.0013s
+== 56 AddDateClosed: migrated (0.0014s) =======================================
+
+== 57 AddMapBugCommentEvent: migrating ========================================
+-- create_enumeration(:map_bug_event_enum, ["opened", "closed", "reopened", "commented", "hidden"])
+   -> 0.0010s
+-- add_column(:map_bug_comment, :event, :map_bug_event_enum)
+   -> 0.0011s
+== 57 AddMapBugCommentEvent: migrated (0.0023s) ===============================
+
+== 20100513171259 AddUserDateIndexToChangeset: migrating ======================
+-- add_index(:changesets, [:user_id, :created_at], {:name=>"changesets_user_id_created_at_idx"})
+   -> 0.0224s
+== 20100513171259 AddUserDateIndexToChangeset: migrated (0.0226s) =============
+
+== 20100516124737 AddOpenId: migrating ========================================
+-- add_column(:users, :openid_url, :string)
+   -> 0.0014s
+-- add_index(:users, [:openid_url], {:name=>"user_openid_url_idx", :unique=>true})
+   -> 0.0224s
+== 20100516124737 AddOpenId: migrated (0.0239s) ===============================
+
+== 20100910084426 AddCallbackToOauthTokens: migrating =========================
+-- add_column(:oauth_tokens, :callback_url, :string)
+   -> 0.0011s
+-- add_column(:oauth_tokens, :verifier, :string, {:limit=>20})
+   -> 0.0006s
+== 20100910084426 AddCallbackToOauthTokens: migrated (0.0019s) ================
+
+== 20101114011429 AddEditorPreferenceToUser: migrating ========================
+-- add_column(:users, :preferred_editor, :string)
+   -> 0.0013s
+== 20101114011429 AddEditorPreferenceToUser: migrated (0.0014s) ===============
+
+== 20110322001319 AddTermsSeenToUser: migrating ===============================
+-- add_column(:users, :terms_seen, :boolean, {:null=>false, :default=>false})
+   -> 0.1170s
+== 20110322001319 AddTermsSeenToUser: migrated (0.1184s) ======================
+
+== 20110508145337 CleanupBugTables: migrating =================================
+-- rename_column(:map_bugs, :date_created, :created_at)
+   -> 0.0044s
+-- rename_column(:map_bugs, :last_changed, :updated_at)
+   -> 0.0041s
+-- rename_column(:map_bugs, :date_closed, :closed_at)
+   -> 0.0040s
+-- rename_column(:map_bug_comment, :date_created, :created_at)
+   -> 0.0028s
+-- rename_column(:map_bug_comment, :commenter_name, :author_name)
+   -> 0.0026s
+-- rename_column(:map_bug_comment, :commenter_ip, :author_ip)
+   -> 0.0026s
+-- rename_column(:map_bug_comment, :commenter_id, :author_id)
+   -> 0.0027s
+-- rename_column(:map_bug_comment, :comment, :body)
+   -> 0.0026s
+== 20110508145337 CleanupBugTables: migrated (0.0263s) ========================
+
+== 20110521142405 RenameBugsToNotes: migrating ================================
+-- rename_enumeration("map_bug_status_enum", "note_status_enum")
+   -> 0.0007s
+-- rename_enumeration("map_bug_event_enum", "note_event_enum")
+   -> 0.0005s
+-- rename_table(:map_bugs, :notes)
+   -> 0.0071s
+-- rename_index(:notes, "map_bugs_pkey", "notes_pkey")
+   -> 0.0007s
+-- rename_index(:notes, "map_bugs_changed_idx", "notes_updated_at_idx")
+   -> 0.0006s
+-- rename_index(:notes, "map_bugs_created_idx", "notes_created_at_idx")
+   -> 0.0005s
+-- rename_index(:notes, "map_bugs_tile_idx", "notes_tile_status_idx")
+   -> 0.0005s
+-- remove_foreign_key(:map_bug_comment, [:bug_id], :map_bugs, [:id])
+   -> 0.0010s
+-- rename_column(:map_bug_comment, :author_id, :commenter_id)
+   -> 0.0027s
+-- remove_foreign_key(:map_bug_comment, [:commenter_id], :users, [:id])
+   -> 0.0011s
+-- rename_column(:map_bug_comment, :commenter_id, :author_id)
+   -> 0.0027s
+-- rename_table(:map_bug_comment, :note_comments)
+   -> 0.0059s
+-- rename_column(:note_comments, :bug_id, :note_id)
+   -> 0.0027s
+-- rename_index(:note_comments, "map_bug_comment_pkey", "note_comments_pkey")
+   -> 0.0006s
+-- rename_index(:note_comments, "map_bug_comment_id_idx", "note_comments_note_id_idx")
+   -> 0.0006s
+-- add_foreign_key(:note_comments, [:note_id], :notes, [:id])
+   -> 0.0020s
+-- add_foreign_key(:note_comments, [:author_id], :users, [:id])
+   -> 0.0022s
+== 20110521142405 RenameBugsToNotes: migrated (0.0333s) =======================
+
+== 20110925112722 RenameIds: migrating ========================================
+-- rename_column(:changeset_tags, :id, :changeset_id)
+   -> 0.0033s
+-- rename_column(:current_node_tags, :id, :node_id)
+   -> 0.0020s
+-- rename_column(:nodes, :id, :node_id)
+   -> 0.0040s
+-- rename_column(:node_tags, :id, :node_id)
+   -> 0.0020s
+-- rename_column(:current_way_tags, :id, :way_id)
+   -> 0.0021s
+-- rename_column(:current_way_nodes, :id, :way_id)
+   -> 0.0027s
+-- rename_column(:ways, :id, :way_id)
+   -> 0.0034s
+-- rename_column(:way_tags, :id, :way_id)
+   -> 0.0020s
+-- rename_column(:way_nodes, :id, :way_id)
+   -> 0.0026s
+-- rename_column(:current_relation_tags, :id, :relation_id)
+   -> 0.0020s
+-- rename_column(:current_relation_members, :id, :relation_id)
+   -> 0.0028s
+-- rename_column(:relations, :id, :relation_id)
+   -> 0.0033s
+-- rename_column(:relation_tags, :id, :relation_id)
+   -> 0.0020s
+-- rename_column(:relation_members, :id, :relation_id)
+   -> 0.0028s
+== 20110925112722 RenameIds: migrated (0.0379s) ===============================
+
+== 20111116184519 UpdateOauth: migrating ======================================
+-- add_column(:oauth_tokens, :scope, :string)
+   -> 0.0189s
+-- add_column(:oauth_tokens, :valid_to, :timestamp)
+   -> 0.0013s
+== 20111116184519 UpdateOauth: migrated (0.0205s) =============================
+
+== 20111212183945 AddLowercaseUserIndexes: migrating ==========================
+-- add_index(:users, :display_name, {:lowercase=>true, :name=>"users_display_name_lower_idx"})
+   -> 0.0217s
+-- add_index(:users, :email, {:lowercase=>true, :name=>"users_email_lower_idx"})
+   -> 0.0224s
+== 20111212183945 AddLowercaseUserIndexes: migrated (0.0443s) =================
+
+== 20120123184321 SwitchToPaperclip: migrating ================================
+-- rename_column(:users, :image, :image_file_name)
+   -> 0.0055s
+== 20120123184321 SwitchToPaperclip: migrated (0.0057s) =======================
+
+== 20120208122334 MergeAclAddressAndMask: migrating ===========================
+-- remove_column(:acls, :netmask)
+   -> 0.0007s
+== 20120208122334 MergeAclAddressAndMask: migrated (0.0083s) ==================
+
+== 20120208194454 AddDomainToAcl: migrating ===================================
+-- add_column(:acls, :domain, :string)
+   -> 0.0009s
+-- change_column(:acls, :address, :inet, {:null=>true})
+   -> 0.0008s
+== 20120208194454 AddDomainToAcl: migrated (0.0018s) ==========================
+
+== 20120214210114 AddTextFormat: migrating ====================================
+-- create_enumeration(:format_enum, ["html", "markdown", "text"])
+   -> 0.0008s
+-- add_column(:users, :description_format, :format_enum, {:null=>false, :default=>"html"})
+   -> 0.1647s
+-- add_column(:user_blocks, :reason_format, :format_enum, {:null=>false, :default=>"html"})
+   -> 0.0676s
+-- add_column(:diary_entries, :body_format, :format_enum, {:null=>false, :default=>"html"})
+   -> 0.1127s
+-- add_column(:diary_comments, :body_format, :format_enum, {:null=>false, :default=>"html"})
+   -> 0.0903s
+-- add_column(:messages, :body_format, :format_enum, {:null=>false, :default=>"html"})
+   -> 0.0905s
+== 20120214210114 AddTextFormat: migrated (0.5270s) ===========================
+
+== 20120219161649 AddUserImageFingerprint: migrating ==========================
+-- add_column(:users, :image_fingerprint, :string, {:null=>true})
+   -> 0.0013s
+== 20120219161649 AddUserImageFingerprint: migrated (0.0046s) =================
+
+== 20120318201948 CreateRedactions: migrating =================================
+-- create_table(:redactions)
+   -> 0.0434s
+-- add_column(:nodes, :redaction_id, :integer, {:null=>true})
+   -> 0.0010s
+-- add_foreign_key(:nodes, [:redaction_id], :redactions, [:id])
+   -> 0.0020s
+-- add_column(:ways, :redaction_id, :integer, {:null=>true})
+   -> 0.0006s
+-- add_foreign_key(:ways, [:redaction_id], :redactions, [:id])
+   -> 0.0016s
+-- add_column(:relations, :redaction_id, :integer, {:null=>true})
+   -> 0.0005s
+-- add_foreign_key(:relations, [:redaction_id], :redactions, [:id])
+   -> 0.0017s
+== 20120318201948 CreateRedactions: migrated (0.0510s) ========================
+
+== 20120328090602 DropSessionTable: migrating =================================
+-- drop_table("sessions")
+   -> 0.0020s
+== 20120328090602 DropSessionTable: migrated (0.0021s) ========================
+
+== 20120404205604 AddUserAndDescriptionToRedaction: migrating =================
+-- add_column(:redactions, :user_id, :bigint, {:null=>false})
+   -> 0.0013s
+-- add_column(:redactions, :description_format, :format_enum, {:null=>false, :default=>"markdown"})
+   -> 0.0514s
+-- add_foreign_key(:redactions, [:user_id], :users, [:id])
+   -> 0.0025s
+== 20120404205604 AddUserAndDescriptionToRedaction: migrated (0.0555s) ========
+
+== 20120808231205 AddCounterCaches: migrating =================================
+-- add_column(:users, :changesets_count, :integer, {:null=>false, :default=>0})
+   -> 0.1661s
+-- add_column(:users, :traces_count, :integer, {:null=>false, :default=>0})
+   -> 0.1809s
+== 20120808231205 AddCounterCaches: migrated (0.3646s) ========================
+
+== 20121005195010 AddDiaryEntryCounterCaches: migrating =======================
+-- add_column(:users, :diary_entries_count, :integer, {:null=>false, :default=>0})
+   -> 0.1652s
+== 20121005195010 AddDiaryEntryCounterCaches: migrated (0.2354s) ==============
+
+== 20121012044047 AddImageUseGravatarToUsers: migrating =======================
+-- add_column(:users, :image_use_gravatar, :boolean, {:null=>false, :default=>false})
+   -> 0.1600s
+-- change_column_default(:users, :image_use_gravatar, true)
+   -> 0.0011s
+== 20121012044047 AddImageUseGravatarToUsers: migrated (0.1633s) ==============
+
+== 20121119165817 DropNearbyPlaceFromNotes: migrating =========================
+-- remove_column(:notes, :nearby_place)
+   -> 0.0008s
+== 20121119165817 DropNearbyPlaceFromNotes: migrated (0.0009s) ================
+
+== 20121202155309 RemoveAuthorNameFromNoteComment: migrating ==================
+-- remove_column(:note_comments, :author_name)
+   -> 0.0009s
+== 20121202155309 RemoveAuthorNameFromNoteComment: migrated (0.0010s) =========
+
+== 20121203124841 ChangeNoteAddressToInet: migrating ==========================
+-- execute("ALTER TABLE note_comments ALTER COLUMN author_ip TYPE inet USING CAST(author_ip AS inet)")
+   -> 0.0753s
+== 20121203124841 ChangeNoteAddressToInet: migrated (0.0754s) =================
+
+== 20130328184137 AddWriteNotesPermission: migrating ==========================
+-- add_column(:oauth_tokens, :allow_write_notes, :boolean, {:null=>false, :default=>false})
+   -> 0.0686s
+-- add_column(:client_applications, :allow_write_notes, :boolean, {:null=>false, :default=>false})
+   -> 0.0676s
+== 20130328184137 AddWriteNotesPermission: migrated (0.1365s) =================
+
+== 20131212124700 AddCreatedAtIndexToNoteComments: migrating ==================
+-- add_index(:note_comments, :created_at)
+   -> 0.0230s
+== 20131212124700 AddCreatedAtIndexToNoteComments: migrated (0.0231s) =========
+
+== 20140115192822 AddTextIndexToNoteComments: migrating =======================
+-- add_index(:note_comments, [], {:columns=>"to_tsvector('english', body)", :method=>"GIN", :name=>"index_note_comments_on_body"})
+   -> 0.0026s
+== 20140115192822 AddTextIndexToNoteComments: migrated (0.0027s) ==============
+
+== 20140117185510 DropCountries: migrating ====================================
+-- drop_table(:countries)
+   -> 0.0018s
+== 20140117185510 DropCountries: migrated (0.0020s) ===========================
+
+== 20140210003018 AddUserImageContentType: migrating ==========================
+-- add_column(:users, :image_content_type, :string)
+   -> 0.0015s
+== 20140210003018 AddUserImageContentType: migrated (0.0016s) =================
+
