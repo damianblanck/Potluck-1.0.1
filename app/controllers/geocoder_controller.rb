@@ -16,6 +16,7 @@ class GeocoderController < ApplicationController
     @sources = []
     if params[:lat] && params[:lon]
       @sources.push "latlon"
+      @sources.push "dms"
       @sources.push "osm_nominatim_reverse"
       @sources.push "geonames_reverse" if defined?(GEONAMES_USERNAME)
     elsif params[:query].match(/^\d{5}(-\d{4})?$/)
@@ -49,6 +50,66 @@ class GeocoderController < ApplicationController
                    :zoom => params[:zoom],
                    :name => "#{lat}, #{lon}"}]
 
+      render :action => "results"
+    end
+  end
+  
+  def search_dms
+	
+	lat = params[:lat].to_f
+	lon = params[:lon].to_f
+	
+	if lat < 0
+		latDir = "S"
+	#elsif lon < 0
+	#	lonDir = "W"
+	else
+		latDir = "N"
+		#lonDir = "E"
+	end
+	
+	
+	if lon < 0
+		lonDir ="W"
+	else 
+		lonDir = "E"
+	end
+	
+	
+    latABS = (params[:lat].to_f).abs
+    lonABS = (params[:lon].to_f).abs
+    
+    latDeg = params[:lat].to_f
+    latDegFloat = (latDeg.to_i).abs
+    latMin = ((latABS - latDegFloat) * 60).to_f
+    latMinFloat = latMin.to_i
+    latSec = ((((latABS - latDegFloat) * 60) - latMinFloat) * 60)
+    latSecFloat = latSec.to_f
+    latSecRounded = latSecFloat.round 3
+    
+    lonDeg = params[:lon].to_f
+    lonDegFloat = (lonDeg.to_i).abs
+    lonMin = ((lonABS - lonDegFloat) * 60).to_f
+    lonMinFloat = lonMin.to_i
+    lonSec = ((((lonABS - lonDegFloat) *60) - lonMinFloat) * 60)
+    lonSecFloat = lonSec.to_f
+    lonSecRounded = lonSecFloat.round 3
+    
+    latDMS = "#{latDir} #{latDegFloat} #{latMinFloat}' #{latSecRounded}\""
+    lonDMS = "#{lonDir} #{lonDegFloat} #{lonMinFloat}' #{lonSecRounded}\""
+    
+    if lat < -90 or lat > 90
+      @error = "Latitude #{lat} out of range"
+      render :action => "error"
+    elsif lon < -180 or lon > 180
+      @error = "Longitude #{lon} out of range"
+      render :action => "error"
+    else
+      @results = [{:lat => lat, :lon => lon,
+                   :zoom => params[:zoom],
+                   #:name => "#{lat}, #{lon}"}]
+                   :name => "#{latDMS}, #{lonDMS}"}]
+  	
       render :action => "results"
     end
   end

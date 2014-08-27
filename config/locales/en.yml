@@ -345,15 +345,18 @@ en:
   geocoder:
     search:
       title:
-        latlon: 'Results from <a href="http://openstreetmap.org/">Internal</a>'
+        #dms: 'Results from <a href="http://openstreetmap.org/">Internal-DMS</a>'
+        #latlon: 'Results from <a href="http://openstreetmap.org/">Internal</a>'      
+        dms: 'Results from <a href="http://openstreetmap.org/">Potluck-DMS</a>'
+        latlon: 'Results from <a href="http://openstreetmap.org/">Potluck-DD</a>'
         us_postcode: 'Results from <a href="http://geocoder.us/">Geocoder.us</a>'
         uk_postcode: 'Results from <a href="http://www.npemap.org.uk/">NPEMap / FreeThe Postcode</a>'
         ca_postcode: 'Results from <a href="http://geocoder.ca/">Geocoder.CA</a>'
         #osm_nominatim: 'Results from <a href="http://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>'
-        osm_nominatim: 'Results from <a href="http://10.194.70.78/nominatim/">Potluck Nominatim</a>'
+        osm_nominatim: 'Results from <a href="http://10.194.70.78/nominatim/">Potluck Geocoder</a>'
         geonames: 'Results from <a href="http://www.geonames.org/">GeoNames</a>'
         #osm_nominatim_reverse: 'Results from <a href="http://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>'
-        osm_nominatim_reverse: 'Results from <a href="http://10.194.70.78/nominatim/">Potluck Nominatim</a>'
+        osm_nominatim_reverse: 'Results from <a href="http://10.194.70.78/nominatim/">Potluck Geocoder</a>'
         geonames_reverse: 'Results from <a href="http://www.geonames.org/">GeoNames</a>'
     search_osm_nominatim:
       prefix_format: "%{name}"
@@ -522,6 +525,7 @@ en:
           street_lamp: "Street Lamp"
           stile: "Stile"
           tertiary: "Tertiary Road"
+          #tertiary: "Tertiary Road - Edit"
           tertiary_link: "Tertiary Road"
           track: "Track"
           trail: "Trail"
@@ -854,7 +858,7 @@ en:
     description:
       title:
         #osm_nominatim: 'Location from <a href="http://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>'
-        osm_nominatim: 'Location from <a href="http://10.194.70.78/nominatim/">Potluck Nominatim</a>'
+        osm_nominatim: 'Location from <a href="http://10.194.70.78/nominatim/">Potluck Geocoder</a>'
         geonames: 'Location from <a href="http://www.geonames.org/">GeoNames</a>'
       types:
         cities: Cities
