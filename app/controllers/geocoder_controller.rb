@@ -95,8 +95,8 @@ class GeocoderController < ApplicationController
     lonSecFloat = lonSec.to_f
     lonSecRounded = lonSecFloat.round 3
     
-    latDMS = "#{latDir} #{latDegFloat} #{latMinFloat}' #{latSecRounded}\""
-    lonDMS = "#{lonDir} #{lonDegFloat} #{lonMinFloat}' #{lonSecRounded}\""
+    latDMS = "#{latDir} #{latDegFloat}° #{latMinFloat}' #{latSecRounded}\""
+    lonDMS = "#{lonDir} #{lonDegFloat}° #{lonMinFloat}' #{lonSecRounded}\""
     
     if lat < -90 or lat > 90
       @error = "Latitude #{lat} out of range"
@@ -110,7 +110,7 @@ class GeocoderController < ApplicationController
                    #:name => "#{lat}, #{lon}"}]
                    :name => "#{latDMS}, #{lonDMS}"}]
   	
-      render :action => "results"
+      render :action => "results" 
     end
   end
 
