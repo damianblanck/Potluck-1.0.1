@@ -61,11 +61,8 @@ class GeocoderController < ApplicationController
 	
 	if lat < 0
 		latDir = "S"
-	#elsif lon < 0
-	#	lonDir = "W"
 	else
 		latDir = "N"
-		#lonDir = "E"
 	end
 	
 	
