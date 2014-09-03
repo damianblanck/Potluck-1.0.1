@@ -487,6 +487,7 @@ en:
           "yes": "Bridge"
         building:
           "yes": "Building"
+          "store_id": "Store_iD"
         emergency:
           fire_hydrant: "Fire Hydrant"
           phone: "Emergency Phone"
