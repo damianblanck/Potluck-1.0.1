@@ -236,8 +236,10 @@ OpenStreetMap::Application.routes.draw do
   match '/geocoder/search_uk_postcode' => 'geocoder#search_uk_postcode', :via => :get
   match '/geocoder/search_ca_postcode' => 'geocoder#search_ca_postcode', :via => :get
   match '/geocoder/search_osm_nominatim' => 'geocoder#search_osm_nominatim', :via => :get
+  match '/geocoder/search_osm_nominatim2' => 'geocoder#search_osm_nominatim2', :via => :get  
   match '/geocoder/search_geonames' => 'geocoder#search_geonames', :via => :get
   match '/geocoder/search_osm_nominatim_reverse' => 'geocoder#search_osm_nominatim_reverse', :via => :get
+  match '/geocoder/search_osm_nominatim2_reverse' => 'geocoder#search_osm_nominatim2_reverse', :via => :get  
   match '/geocoder/search_geonames_reverse' => 'geocoder#search_geonames_reverse', :via => :get
 
   # export

@@ -18,19 +18,32 @@ class GeocoderController < ApplicationController
       @sources.push "latlon"
       @sources.push "dms"
       @sources.push "osm_nominatim_reverse"
-      @sources.push "geonames_reverse" if defined?(GEONAMES_USERNAME)
+      @sources.push "osm_nominatim2_reverse"
+      #@sources.push "geonames_reverse" if defined?(GEONAMES_USERNAME)
     elsif params[:query].match(/^\d{5}(-\d{4})?$/)
-      @sources.push "us_postcode"
+      #@sources.push "latlon"
+      #@sources.push "dms"
+      #@sources.push "us_postcode"
       @sources.push "osm_nominatim"
+      @sources.push "osm_nominatim2"
     elsif params[:query].match(/^(GIR 0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])\s*[0-9][ABD-HJLNP-UW-Z]{2})$/i)
-      @sources.push "uk_postcode"
+      #@sources.push "latlon"
+      #@sources.push "dms"
+      #@sources.push "uk_postcode"
       @sources.push "osm_nominatim"
+      @sources.push "osm_nominatim2"
     elsif params[:query].match(/^[A-Z]\d[A-Z]\s*\d[A-Z]\d$/i)
-      @sources.push "ca_postcode"
+      #@sources.push "latlon"
+      #@sources.push "dms"
+      #@sources.push "ca_postcode"
       @sources.push "osm_nominatim"
+      @sources.push "osm_nominatim2"
     else
+      #@sources.push "latlon"
+      #@sources.push "dms"
       @sources.push "osm_nominatim"
-      @sources.push "geonames" if defined?(GEONAMES_USERNAME)
+      @sources.push "osm_nominatim2"
+      #@sources.push "geonames" if defined?(GEONAMES_USERNAME)
     end
 
     render :layout => map_layout
@@ -88,7 +101,7 @@ class GeocoderController < ApplicationController
     lonDegFloat = (lonDeg.to_i).abs
     lonMin = ((lonABS - lonDegFloat) * 60).to_f
     lonMinFloat = lonMin.to_i
-    lonSec = ((((lonABS - lonDegFloat) *60) - lonMinFloat) * 60)
+    lonSec = ((((lonABS - lonDegFloat) * 60) - lonMinFloat) * 60)
     lonSecFloat = lonSec.to_f
     lonSecRounded = lonSecFloat.round 3
     
@@ -204,6 +217,7 @@ class GeocoderController < ApplicationController
 
     # ask nominatim
     response = fetch_xml("#{NOMINATIM_URL}search?format=xml&q=#{escape_query(query)}#{viewbox}#{exclude}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")
+    #response = fetch_xml("http://10.194.70.78/nominatim/search?format=xml&q=#{escape_query(query)}#{viewbox}#{exclude}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")
 
     # extract the results from the response
     results =  response.elements["searchresults"]
@@ -252,6 +266,78 @@ class GeocoderController < ApplicationController
 #    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
 #    render :action => "error"
   end
+
+  def search_osm_nominatim2
+    # get query parameters
+    query = params[:query]
+    minlon = params[:minlon]
+    minlat = params[:minlat]
+    maxlon = params[:maxlon]
+    maxlat = params[:maxlat]
+
+    # get view box
+    if minlon && minlat && maxlon && maxlat
+      viewbox = "&viewbox=#{minlon},#{maxlat},#{maxlon},#{minlat}"
+    end
+
+    # get objects to excude
+    if params[:exclude]
+      exclude = "&exclude_place_ids=#{params[:exclude]}"
+    end
+
+    # ask nominatim
+    #response = fetch_xml("#{NOMINATIM_URL}search?format=xml&q=#{escape_query(query)}#{viewbox}#{exclude}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")
+    response = fetch_xml("http://10.194.70.78/nominatim2/search?format=xml&q=#{escape_query(query)}#{viewbox}#{exclude}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")
+
+    # extract the results from the response
+    results =  response.elements["searchresults"]
+
+    # extract parameters from more_url
+    more_url_params = CGI.parse(URI.parse(results.attributes["more_url"]).query)
+
+    # create result array
+    @results = Array.new
+
+    # create parameter hash for "more results" link
+    @more_params = params.merge({
+      :exclude => more_url_params["exclude_place_ids"].first
+    })
+
+    # parse the response
+    results.elements.each("place") do |place|
+      lat = place.attributes["lat"].to_s
+      lon = place.attributes["lon"].to_s
+      klass = place.attributes["class"].to_s
+      type = place.attributes["type"].to_s
+      name = place.attributes["display_name"].to_s
+      min_lat,max_lat,min_lon,max_lon = place.attributes["boundingbox"].to_s.split(",")
+      if type.empty?
+        prefix_name = ""
+      else
+        prefix_name = t "geocoder.search_osm_nominatim2.prefix.#{klass}.#{type}", :default => type.gsub("_", " ").capitalize
+      end
+      if klass == 'boundary' and type == 'administrative'
+        rank = (place.attributes["place_rank"].to_i + 1) / 2
+        prefix_name = t "geocoder.search_osm_nominatim2.admin_levels.level#{rank}", :default => prefix_name
+      end
+      prefix = t "geocoder.search_osm_nominatim2.prefix_format", :name => prefix_name
+      object_type = place.attributes["osm_type"]
+      object_id = place.attributes["osm_id"]
+
+      @results.push({:lat => lat, :lon => lon,
+                     :min_lat => min_lat, :max_lat => max_lat,
+                     :min_lon => min_lon, :max_lon => max_lon,
+                     :prefix => prefix, :name => name,
+                     :type => object_type, :id => object_id})
+    end
+
+    render :action => "results"
+#  rescue Exception => ex
+#    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
+#    render :action => "error"
+  end
+
+
 
   def search_geonames
     # get query parameters
@@ -315,6 +401,40 @@ class GeocoderController < ApplicationController
     @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
     render :action => "error"
   end
+
+  def search_osm_nominatim2_reverse
+    # get query parameters
+    lat = params[:lat]
+    lon = params[:lon]
+    zoom = params[:zoom]
+
+    # create result array
+    @results = Array.new
+
+    # ask nominatim
+    #response = fetch_xml("#{NOMINATIM_URL}reverse?lat=#{lat}&lon=#{lon}&zoom=#{zoom}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")
+    response = fetch_xml("http://10.194.70.78/nominatim2/reverse?lat=#{lat}&lon=#{lon}&zoom=#{zoom}&accept-language=#{http_accept_language.user_preferred_languages.join(',')}")	
+    
+    # parse the response
+    response.elements.each("reversegeocode/result") do |result|
+      lat = result.attributes["lat"].to_s
+      lon = result.attributes["lon"].to_s
+      object_type = result.attributes["osm_type"]
+      object_id = result.attributes["osm_id"]
+      description = result.get_text.to_s
+
+      @results.push({:lat => lat, :lon => lon,
+                     :zoom => zoom,
+                     :name => description,
+                     :type => object_type, :id => object_id})
+    end
+
+    render :action => "results"
+  rescue Exception => ex
+    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
+    render :action => "error"
+  end
+
 
   def search_geonames_reverse
     # get query parameters
