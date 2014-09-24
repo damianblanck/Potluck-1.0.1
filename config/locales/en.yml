@@ -1364,7 +1364,7 @@ en:
       title:
         #osm_nominatim: 'Location from <a href="http://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>'
         osm_nominatim: 'Location from <a href="http://10.194.70.78/nominatim/">Potluck Geocoder</a>'
-        osm_nominatim2: 'Location from <a href="http://10.194.70.78/nominatim/">Potluck Geocoder 2</a>'
+        osm_nominatim2: 'Location from <a href="http://10.194.70.78/nominatim2/">Potluck Geocoder 2</a>'
         geonames: 'Location from <a href="http://www.geonames.org/">GeoNames</a>'
       types:
         cities: Cities
@@ -1425,8 +1425,10 @@ en:
     partners_bytemark: "Bytemark Hosting"
     partners_partners: "partners"
     partners_url: "http://wiki.openstreetmap.org/wiki/Partners"
-    osm_offline: "The OpenStreetMap database is currently offline while essential database maintenance work is carried out."
-    osm_read_only: "The OpenStreetMap database is currently in read-only mode while essential database maintenance work is carried out."
+    #osm_offline: "The OpenStreetMap database is currently offline while essential database maintenance work is carried out."
+    #osm_read_only: "The OpenStreetMap database is currently in read-only mode while essential database maintenance work is carried out."
+    osm_offline: "The Potluck database is currently offline while essential database maintenance work is carried out."
+    osm_read_only: "The Potluck database is currently in read-only mode while essential database maintenance work is carried out."    
     donate: "Support OpenStreetMap by %{link} to the Hardware Upgrade Fund."
     help: Help
     about: About

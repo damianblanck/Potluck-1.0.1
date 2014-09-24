@@ -262,9 +262,9 @@ class GeocoderController < ApplicationController
     end
 
     render :action => "results"
-#  rescue Exception => ex
-#    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
-#    render :action => "error"
+  rescue Exception => ex
+    @error = "Error contacting 10.194.70.78/nominatim/: #{ex.to_s}"
+    render :action => "error"
   end
 
   def search_osm_nominatim2
@@ -332,9 +332,9 @@ class GeocoderController < ApplicationController
     end
 
     render :action => "results"
-#  rescue Exception => ex
-#    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
-#    render :action => "error"
+  rescue Exception => ex
+    @error = "Error contacting 10.194.70.78/nominatim2/: #{ex.to_s}"
+    render :action => "error"
   end
 
 
@@ -398,7 +398,7 @@ class GeocoderController < ApplicationController
 
     render :action => "results"
   rescue Exception => ex
-    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
+    @error = "Error contacting 10.194.70.78/nominatim/: #{ex.to_s}"
     render :action => "error"
   end
 
@@ -431,7 +431,7 @@ class GeocoderController < ApplicationController
 
     render :action => "results"
   rescue Exception => ex
-    @error = "Error contacting nominatim.openstreetmap.org: #{ex.to_s}"
+    @error = "Error contacting 10.194.70.78/nominatim2/: #{ex.to_s}"
     render :action => "error"
   end
 
